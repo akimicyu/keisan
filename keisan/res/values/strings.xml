@@ -21,7 +21,9 @@
     <string name="statusZero">0 / 0</string>
     <string name="time1Min">01:00:00</string>
     <string name="result">結果</string>
-    <string name="percent">%1$2f %%</string>
+    <string name="percent">%1$.3f %%</string>
     <string name="percentZero">0 %</string>
+    <string name="highScore">ハイスコア：%1$d</string>
+    <string name="highScoreUpdate">ハイスコア更新！ %1$d -> %2$d</string>
     
 </resources>
