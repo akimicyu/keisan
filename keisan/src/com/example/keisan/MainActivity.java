@@ -3,6 +3,8 @@ package com.example.keisan;
 import java.util.Random;
 
 import android.app.Activity;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +16,10 @@ public class MainActivity extends Activity {
 	private TextView textViewQuestion;
 	private TextView textViewAnswer;
 	private TextView textViewStatus;
-
+	private SoundPool soundPool;
+	private int soundOk;
+	private int soundNg;
+	
 	private Random rand = new Random();
 	private int result = 0;
 
@@ -28,7 +33,16 @@ public class MainActivity extends Activity {
 		textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
 		textViewAnswer = (TextView) findViewById(R.id.textViewAnswer);
 		textViewStatus = (TextView) findViewById(R.id.textViewStatus);
+		soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+		soundOk = soundPool.load(this, R.raw.crrect_answer2, 1);
+		soundNg = soundPool.load(this, R.raw.blip1, 1);
 		newQuestion();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		soundPool.release();
 	}
 
 	public void inputNumber(View v) {
@@ -49,6 +63,8 @@ public class MainActivity extends Activity {
 			updateStatus(correct);
 			String message = correct ? "○：正解です" : "×：正解は" + result + "です";
 			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+			int playSound = correct ? soundOk : soundNg;
+			soundPool.play(playSound, 1.0F, 1.0F, 0, 0, 1.0F);
 			newQuestion();
 		} catch (NumberFormatException nfe) {
 			Toast.makeText(this, "数字を入力してください", Toast.LENGTH_SHORT).show();
@@ -69,6 +85,5 @@ public class MainActivity extends Activity {
 		String status = getResources().getString(R.string.status, countCorrect, countAnswer);
 		textViewStatus.setText(status);
 	}
-	
 
 }
