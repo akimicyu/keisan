@@ -12,7 +12,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textViewQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -43,28 +43,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="1" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn1" />
 
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="2" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn2" />
 
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="3" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn3" />
 
                 <Button
                     android:id="@+id/button4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="4" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn4" />
             </TableRow>
 
             <TableRow
@@ -77,28 +81,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="5" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn5" />
 
                 <Button
                     android:id="@+id/button6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="6" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn6" />
 
                 <Button
                     android:id="@+id/button7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="7" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn7" />
 
                 <Button
                     android:id="@+id/button8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="8" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn8" />
             </TableRow>
 
             <TableRow
@@ -111,31 +119,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="9" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn9" />
 
                 <Button
                     android:id="@+id/button10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputNumber"
-                    android:text="0" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btn0" />
 
                 <Button
                     android:id="@+id/button11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputClear"
-                    android:text="Clear" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btnClear" />
 
                 <Button
                     android:id="@+id/button12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="inputEnter"
-                    android:text="Enter" />
+                    style="@android:attr/buttonBarButtonStyle"
+                    android:text="@string/btnEnter" />
             </TableRow>
         </TableLayout>
 
         </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textColor="@color/blue"
+        android:text="@string/statusZero" />
 
 </RelativeLayout>

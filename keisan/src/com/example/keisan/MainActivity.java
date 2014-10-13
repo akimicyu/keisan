@@ -10,25 +10,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
-	private TextView textView1;
+
+	private TextView textViewQuestion;
 	private TextView textViewAnswer;
+	private TextView textViewStatus;
 
 	private Random rand = new Random();
 	private int result = 0;
+
+	private int countAnswer  = 0;
+	private int countCorrect = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		textView1 = (TextView)findViewById(R.id.textView1);
-		textViewAnswer = (TextView)findViewById(R.id.textViewAnswer);
+		textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
+		textViewAnswer = (TextView) findViewById(R.id.textViewAnswer);
+		textViewStatus = (TextView) findViewById(R.id.textViewStatus);
 		newQuestion();
 	}
 
 	public void inputNumber(View v) {
 		String ansStr = textViewAnswer.getText().toString();
-		CharSequence input  = ((Button)v).getText();
+		CharSequence input = ((Button) v).getText();
 		textViewAnswer.setText(ansStr + input);
 	}
 
@@ -40,10 +45,9 @@ public class MainActivity extends Activity {
 		try {
 			String text = textViewAnswer.getText().toString();
 			int answer = Integer.parseInt(text);
-			String message = "○：正解です";
-			if (answer != result) {
-				message = "×：正解は" + result + "です";
-			}
+			boolean correct = (answer == result);
+			updateStatus(correct);
+			String message = correct ? "○：正解です" : "×：正解は" + result + "です";
 			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 			newQuestion();
 		} catch (NumberFormatException nfe) {
@@ -55,8 +59,16 @@ public class MainActivity extends Activity {
 		int a = rand.nextInt(9) + 1;
 		int b = rand.nextInt(9) + 1;
 		result = a * b;
-		textView1.setText(String.format("%d * %d = ?", a, b));
+		textViewQuestion.setText(String.format("%d * %d = ?", a, b));
 		textViewAnswer.setText("");
 	}
 	
+	private void updateStatus(boolean correct) {
+		countAnswer++;
+		if (correct) countCorrect++;
+		String status = getResources().getString(R.string.status, countCorrect, countAnswer);
+		textViewStatus.setText(status);
+	}
+	
+
 }
