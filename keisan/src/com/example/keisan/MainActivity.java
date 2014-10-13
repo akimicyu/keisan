@@ -130,8 +130,10 @@ public class MainActivity extends Activity {
 	public void timeUpdate(String newTime) {
 		textViewTime.setText(newTime);
 		int remainMin = Integer.parseInt(newTime.substring(3,5));
-		if (remainMin < 15) {
+		if (remainMin < 10) {
 			textViewTime.setTextColor(getResources().getColor(R.color.red));
+		} else if (remainMin < 20) {
+			textViewTime.setTextColor(getResources().getColor(R.color.yellow));
 		}
 	}
 
