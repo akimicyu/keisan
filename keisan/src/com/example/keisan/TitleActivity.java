@@ -52,7 +52,7 @@ public class TitleActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == MainActivity.NORMAL_END) {
+		if (requestCode == MainActivity.NORMAL_END && data != null) {
 			Intent i = new Intent(this, ResultActivity.class);
 			i.putExtra("countAnswer",  data.getIntExtra("countAnswer", 0));
 			i.putExtra("countCorrect", data.getIntExtra("countCorrect", 0));
