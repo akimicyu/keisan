@@ -56,9 +56,11 @@ public class TitleActivity extends Activity {
 			Intent i = new Intent(this, ResultActivity.class);
 			i.putExtra("countAnswer",  data.getIntExtra("countAnswer", 0));
 			i.putExtra("countCorrect", data.getIntExtra("countCorrect", 0));
-			startActivity(i);
-		} else if (requestCode == MainActivity.NORMAL_RETRY) {
-			gameStart("Normal", MainActivity.NORMAL_END);
+			startActivityForResult(i, ResultActivity.RESULT_END);
+		} else if (requestCode == ResultActivity.RESULT_END && data != null) {
+			if (data.getBooleanExtra("retry", false)) {
+				gameStart("Normal", MainActivity.NORMAL_END);
+			}
 		}
 	}
 	

@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 public class ResultActivity extends Activity {
 
+	public static final int RESULT_END   = 300;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,7 +42,9 @@ public class ResultActivity extends Activity {
 		bn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setResult(MainActivity.NORMAL_RETRY);
+				Intent i = new Intent();
+				i.putExtra("retry", true);
+				setResult(ResultActivity.RESULT_END, i);
 				finish();
 			}
 		});

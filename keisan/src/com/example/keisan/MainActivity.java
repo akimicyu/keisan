@@ -16,7 +16,6 @@ public class MainActivity extends Activity {
 
 	public static final int NORMAL_END   = 100;
 	public static final int ENDLESS_END  = 101;
-	public static final int NORMAL_RETRY = 200;
 	
 	private TextView textViewQuestion;
 	private TextView textViewAnswer;
