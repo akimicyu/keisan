@@ -79,21 +79,24 @@ public class MainActivity extends Activity {
 	}
 
 	public void inputEnter(View v) {
+		boolean correct;
+		String message;
 		try {
 			String text = textViewAnswer.getText().toString();
 			int answer = Integer.parseInt(text);
-			boolean correct = (answer == result);
-			updateStatus(correct);
-			String message = correct ? "○：正解です" : "×：正解は" + result + "です";
-			if (myToast != null) { myToast.cancel(); }
-			myToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-			myToast.show();
-			int playSound = correct ? soundOk : soundNg;
-			soundPool.play(playSound, 1.0F, 1.0F, 0, 0, 1.0F);
-			newQuestion();
+			correct = (answer == result);
+			message = correct ? "○：正解です" : "×：正解は" + result + "です";
 		} catch (NumberFormatException nfe) {
-			Toast.makeText(this, "数字を入力してください", Toast.LENGTH_SHORT).show();
+			correct = false;
+			message = "数字を入力してください";
 		}
+		if (myToast != null) { myToast.cancel(); }
+		myToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+		myToast.show();
+		int playSound = correct ? soundOk : soundNg;
+		soundPool.play(playSound, 1.0F, 1.0F, 0, 0, 1.0F);
+		updateStatus(correct);
+		newQuestion();
 	}
 
 	private void newQuestion() {
