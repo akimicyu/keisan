@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">計算野郎</string>
+    <string name="app_name">計算やらないか？</string>
+    <string name="app_title">計算\nやらないか？</string>
     <string name="btnNormalMode">通常モード</string>
     <string name="btnEndlessMode">エンドレスモード</string>
     <string name="btnRetry">もう一回</string>
