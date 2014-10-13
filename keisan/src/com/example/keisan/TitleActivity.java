@@ -7,6 +7,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.CycleInterpolator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -41,6 +45,9 @@ public class TitleActivity extends Activity {
 		int highScore = sp.getInt("highScore", 0);
 		TextView highScoreText = ((TextView) findViewById(R.id.textViewHighScore));
 		highScoreText.setText(getResources().getString(R.string.highScore, highScore));
+		Animation alpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
+		highScoreText.setAnimation(alpha);
+		alpha.start();
 	}
 
 	private void gameStart(String mode, int requestcode) {

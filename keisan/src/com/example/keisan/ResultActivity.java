@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -35,6 +37,9 @@ public class ResultActivity extends Activity {
 				sp.edit().putInt("highScore", countCorrect).commit();
 				TextView hvhs = ((TextView) findViewById(R.id.textViewHighScoreUpdate));
 				hvhs.setText(getResources().getString(R.string.highScoreUpdate, highScore, countCorrect));
+				Animation alpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
+				hvhs.setAnimation(alpha);
+				alpha.start();
 				hvhs.setVisibility(View.VISIBLE);
 			}
 		}
