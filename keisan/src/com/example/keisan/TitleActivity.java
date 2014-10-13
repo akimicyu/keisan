@@ -18,22 +18,22 @@ public class TitleActivity extends Activity {
 		bn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				gameStart("Normal");
+				gameStart("Normal", MainActivity.NORMAL_END);
 			}
 		});
 		Button be = (Button) findViewById(R.id.buttonEndless);
 		be.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				gameStart("Endless");
+				gameStart("Endless", MainActivity.ENDLESS_END);
 			}
 		});
 	}
 
-	private void gameStart(String mode) {
+	private void gameStart(String mode, int requestcode) {
 		Intent i = new Intent(getApplicationContext(), MainActivity.class);
 		i.putExtra("mode", mode);
-		startActivity(i);
+		startActivityForResult(i,requestcode);
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class TitleActivity extends Activity {
 			i.putExtra("countCorrect", data.getIntExtra("countCorrect", 0));
 			startActivity(i);
 		} else if (requestCode == MainActivity.NORMAL_RETRY) {
-			gameStart("Normal");
+			gameStart("Normal", MainActivity.NORMAL_END);
 		}
 	}
 	
