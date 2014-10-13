@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
 	private TextView textViewAnswer;
 	private TextView textViewStatus;
 	private TextView textViewTime;
+	private Toast myToast;
 	private SoundPool soundPool;
 	private int soundOk;
 	private int soundNg;
@@ -83,7 +84,9 @@ public class MainActivity extends Activity {
 			boolean correct = (answer == result);
 			updateStatus(correct);
 			String message = correct ? "○：正解です" : "×：正解は" + result + "です";
-			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+			if (myToast != null) { myToast.cancel(); }
+			myToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+			myToast.show();
 			int playSound = correct ? soundOk : soundNg;
 			soundPool.play(playSound, 1.0F, 1.0F, 0, 0, 1.0F);
 			newQuestion();
