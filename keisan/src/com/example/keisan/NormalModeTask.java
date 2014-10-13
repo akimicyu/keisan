@@ -21,7 +21,7 @@ public class NormalModeTask extends AsyncTask<Integer, String, Void> {
 			long currentTime = System.currentTimeMillis();
 			String remainText = "01:00:00";
 			while (currentTime - startTime < 1 * MINUTES) {
-				Thread.sleep(100);
+				Thread.sleep(13); // タイマーのまわりをそれっぽくしたい
 				long remain = 1*MINUTES - (currentTime - startTime);
 				remainText = String.format(
 						Locale.JAPAN,
