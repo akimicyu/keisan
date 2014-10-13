@@ -69,6 +69,7 @@ public class MainActivity extends Activity {
 
 	public void inputNumber(View v) {
 		String ansStr = textViewAnswer.getText().toString();
+		if (ansStr.length() >= 6) return; // 桁数の上限
 		CharSequence input = ((Button) v).getText();
 		textViewAnswer.setText(ansStr + input);
 	}
