@@ -48,10 +48,23 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 	
 	private void newQuestion() {
-		int a = rand.nextInt(9) + 1;
-		int b = rand.nextInt(9) + 1;
-		result = a * b;
-		textView1.setText(String.format("%d * %d = ?", a, b));
+		Operation op;
+		int a, b;
+		do {
+			op = Operation.values()[rand.nextInt(Operation.values().length)];
+			a = rand.nextInt(10);
+			b = rand.nextInt(10);
+			if (op == Operation.MINUS) { // マイナスを入力させたくない
+				if (a < b) continue;
+			}
+			if (op == Operation.DIVIDE) { // ゼロ除算と余りは無しにしたい
+				if (b == 0) continue;
+				if (a % b > 0) continue;
+			}
+			break;
+		} while(true);
+		result = op.apply(a, b);
+		textView1.setText(String.format("%d %s %d = ?", a, op.character(), b));
 		editText1.setText("");
 	}
 	
