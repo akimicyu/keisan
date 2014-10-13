@@ -3,6 +3,7 @@ package com.example.keisan;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -13,13 +14,18 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	public static final int NORMAL_END   = 100;
+	public static final int NORMAL_RETRY = 200;
+	
 	private TextView textViewQuestion;
 	private TextView textViewAnswer;
 	private TextView textViewStatus;
+	private TextView textViewTime;
 	private SoundPool soundPool;
 	private int soundOk;
 	private int soundNg;
 	
+	NormalModeTask nmt = null;
 	private Random rand = new Random();
 	private int result = 0;
 
@@ -29,13 +35,25 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// 画面周り
 		setContentView(R.layout.activity_main);
+		getActionBar().hide();
 		textViewQuestion = (TextView) findViewById(R.id.textViewQuestion);
 		textViewAnswer = (TextView) findViewById(R.id.textViewAnswer);
 		textViewStatus = (TextView) findViewById(R.id.textViewStatus);
+		textViewTime   = (TextView) findViewById(R.id.textViewTime);
+		// サウンド
 		soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
 		soundOk = soundPool.load(this, R.raw.crrect_answer2, 1);
 		soundNg = soundPool.load(this, R.raw.blip1, 1);
+		// モード
+		Intent i = getIntent();
+		String mode = i.getStringExtra("mode");
+		if ("Normal".equals(mode)) {
+			textViewTime.setVisibility(View.VISIBLE);
+			nmt = new NormalModeTask(this);
+			nmt.execute();
+		}
 		newQuestion();
 	}
 
@@ -43,6 +61,9 @@ public class MainActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		soundPool.release();
+		if (nmt != null) {
+			nmt.cancel(true);
+		}
 	}
 
 	public void inputNumber(View v) {
@@ -97,6 +118,22 @@ public class MainActivity extends Activity {
 		if (correct) countCorrect++;
 		String status = getResources().getString(R.string.status, countCorrect, countAnswer);
 		textViewStatus.setText(status);
+	}
+
+	public void timeUpdate(String newTime) {
+		textViewTime.setText(newTime);
+		int remainMin = Integer.parseInt(newTime.substring(3,5));
+		if (remainMin < 15) {
+			textViewTime.setTextColor(getResources().getColor(R.color.red));
+		}
+	}
+
+	public void gameEnd() {
+		Intent i = new Intent();
+		i.putExtra("countAnswer", countAnswer);
+		i.putExtra("countCorrect", countCorrect);
+		setResult(NORMAL_END, i);
+		finish();
 	}
 
 }
