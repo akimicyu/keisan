@@ -28,7 +28,7 @@ public class ResultActivity extends Activity {
 			TextView status = ((TextView) findViewById(R.id.textViewStatus));
 			status.setText(getResources().getString(R.string.status, countCorrect, countAnswer));
 			TextView percent = ((TextView) findViewById(R.id.textViewPercent));
-			float per = 100.0f * countCorrect / countAnswer;
+			float per = 100.0f * countCorrect / Math.max(countAnswer, 1);
 			percent.setText(getResources().getString(R.string.percent, per));
 			// 以降、ハイスコア周り
 			SharedPreferences sp = getSharedPreferences("config", Context.MODE_PRIVATE);
