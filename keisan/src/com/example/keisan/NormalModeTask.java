@@ -25,7 +25,7 @@ public class NormalModeTask extends AsyncTask<Integer, String, Void> {
 				long remain = 1*MINUTES - (currentTime - startTime);
 				remainText = String.format(
 						Locale.JAPAN,
-						"00:%1$02d:%2$04d",
+						"00:%1$02d:%2$03d",
 						remain / SECONDS,
 						remain % SECONDS
 					);
