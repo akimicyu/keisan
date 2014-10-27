@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import android.os.AsyncTask;
 
-public class NormalModeTask extends AsyncTask<Integer, String, Void> {
+public class NormalModeTask extends AsyncTask<Void, String, Void> {
 
 	private final int SECONDS = 1000;
 	private final int MINUTES = 60 * SECONDS;
@@ -15,7 +15,7 @@ public class NormalModeTask extends AsyncTask<Integer, String, Void> {
 	}
 
 	@Override
-	protected Void doInBackground(Integer... params) {
+	protected Void doInBackground(Void... params) {
 		try {
 			long startTime = System.currentTimeMillis();
 			long currentTime = System.currentTimeMillis();
